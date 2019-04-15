@@ -25,16 +25,17 @@ public class IncomingCallReceiver extends BroadcastReceiver {
                     m.setAccessible(true);
                     telephonyService = (ITelephony) m.invoke(tm);
 
-                    if ((number != null)) {
+                        telephonyService.silenceRinger();
                         telephonyService.endCall();
                         Toast.makeText(context, "Ending the call from: " + number, Toast.LENGTH_SHORT).show();
-                    }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 Toast.makeText(context, "Ring " + number, Toast.LENGTH_SHORT).show();
+
 
             }
             if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)){
