@@ -1,11 +1,16 @@
 package epl.eldaf_electrony.aglan;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,32 +18,62 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 
+import static android.os.Build.VERSION_CODES.P;
+
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_READ_PHONE_STATE=1;
+    private static final int PERMISSION_MODIFY_PHONE_STATE=1;
     MediaPlayer mediaPlayer = null;
     private final Random mRandom = new Random();
     int delayMillis;
     Handler handler;
     CountDownTimer countDownTimer;
     int x=-1;
+   int time=100;
     Runnable runnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Toast.makeText(MainActivity.this,"sdgf",Toast.LENGTH_LONG).show();
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED || checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
-                String[] permissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE};
 
+        RadioGroup  group= (RadioGroup) findViewById(R.id.radio);
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                View radioButton = radioGroup.findViewById(i);
+                int index = radioGroup.indexOfChild(radioButton);
+               // Toast.makeText(MainActivity.this,index+"",Toast.LENGTH_LONG).show();
+                if(index==0){
+                    time=100;
+                }
+                if(index==1){
+                    time=160;
+                }
+                if(index==2){
+                    time=220;
+                }
+                if(index==3){
+                    time=280;
+                }
+                if(index==4){
+                    time=340;
+                }
+            }
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_DENIED || checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED &&checkSelfPermission(Manifest.permission.MODIFY_PHONE_STATE) == PackageManager.PERMISSION_DENIED) {
+                String[] permissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,Manifest.permission.MODIFY_PHONE_STATE};
                 requestPermissions(permissions,PERMISSION_REQUEST_READ_PHONE_STATE);
             }
+
         }
 
        repeat();
@@ -53,13 +88,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Permission NOT granted: " + PERMISSION_REQUEST_READ_PHONE_STATE, Toast.LENGTH_SHORT).show();
                 }
 
-                return;
+            }
+            return;
             }
         }
-    }
+
 
         public void repeat(){
-            final int counter=(40+1)*1000;
+            final int counter=(time)*1000;
             countDownTimer=   new CountDownTimer(counter, 1000) {
 
                 public void onTick(long millisUntilFinished) {
@@ -68,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     //here you can have your logic to set text to edittext
                     if(g==1){
                         x++;
-                        if(x==2){
+                        if(x==26){
                             x=0;
                         }
                         startplayer(x);
@@ -83,27 +119,108 @@ public class MainActivity extends AppCompatActivity {
         }
         public void startplayer(int a){
         if(a==0){
-            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.ass);
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.tast,
-                    (ViewGroup) findViewById(R.id.toast_layout_root));
-
-            ImageView image = (ImageView) layout.findViewById(R.id.image);
-            image.setImageResource(R.drawable.logo);
-            TextView text = (TextView) layout.findViewById(R.id.text);
-            text.setText("Hello! This is a custom toast!");
-
-            Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setView(layout);
-            toast.show();
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.doaa);
+          alarm();
         }
         else if(a==1){
-            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.doaa);
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.e);
+            alarm();
             }
+        else if(a==2){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.b);
+            alarm();
+        }
+        else if(a==3){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.c);
+            alarm();
+        }
+        else if(a==4){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.d);
+            alarm();
+        }
+        else if(a==5){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.a);
+            alarm();
+        }
+        else if(a==6){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.f);
+            alarm();
+        }
+        else if(a==7){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.g);
+            alarm();
+        }
+        else if(a==8){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.h);
+            alarm();
+        }
+        else if(a==9){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.i);
+            alarm();
+        }
+        else if(a==10){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.j);
+            alarm();
+        }
+        else if(a==11){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.k);
+            alarm();
+        }
+        else if(a==12){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.l);
+            alarm();
+        }
+        else if(a==13){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.m);
+            alarm();
+        }
+        else if(a==14){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.n);
+            alarm();
+        }
+        else if(a==15){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.o);
+            alarm();
+        }
+        else if(a==16){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.p);
+            alarm();
+        }
+        else if(a==17){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.q);
+            alarm();
+        }
+        else if(a==18){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.r);
+            alarm();
+        }
+        else if(a==19){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.s);  alarm();
+        }
+        else if(a==20){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.t);   alarm();
+        }
+        else if(a==21){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.u);   alarm();
+        }
+        else if(a==22){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.v);   alarm();
+        }
+        else if(a==23){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.w);   alarm();
+        }
+        else if(a==24){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.x);   alarm();
+        }
+        else if(a==25){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.y);  alarm();
+        }
+        else if(a==26){
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.z);  alarm();
+        }
+
             else{
-            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.ass);
+            mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.e);  alarm();
 
         }
 
@@ -123,4 +240,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        public void alarm(){
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.tast,
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
+
+            ImageView image = (ImageView) layout.findViewById(R.id.image);
+            image.setImageResource(R.drawable.logo);
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("حافظ على سلامتك وسلامة غيرك ^_^");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+    }
+
 }

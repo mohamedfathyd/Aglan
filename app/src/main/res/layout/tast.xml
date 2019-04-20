@@ -20,6 +20,6 @@
         android:text="lgkfdjlgkjdfglkdfjgldjfgldlkgjdlk"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="#FFF" />
+        android:textColor="#b33b3b" />
 
 </LinearLayout>

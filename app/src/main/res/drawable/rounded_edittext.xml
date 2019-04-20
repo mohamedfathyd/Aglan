@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     >
 
-    <solid android:color="#b3b3b3"
+    <solid android:color="#ffffff"
 
         />
 
     <stroke
         android:width="1.5dp"
-        android:color="#ffffff" />
+        android:color="#b3b3b3" />
     <corners
         android:topLeftRadius="5dp"
         android:topRightRadius="5dp"
