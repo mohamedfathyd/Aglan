@@ -1,4 +1,4 @@
-package epl.eldaf_electrony.aglan;
+package epl.ep.aglan;
 
 import android.Manifest;
 import android.app.NotificationManager;
@@ -36,13 +36,28 @@ public class MainActivity extends AppCompatActivity {
     Handler handler;
     CountDownTimer countDownTimer;
     int x=-1;
-   int time=100;
+   int time=80;
     Runnable runnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+            Intent intent = new Intent(
+                    android.provider.Settings
+                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+            startActivity(intent);
+            AudioManager audioManager =
+                    (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+        }
         RadioGroup  group= (RadioGroup) findViewById(R.id.radio);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -51,19 +66,19 @@ public class MainActivity extends AppCompatActivity {
                 int index = radioGroup.indexOfChild(radioButton);
                // Toast.makeText(MainActivity.this,index+"",Toast.LENGTH_LONG).show();
                 if(index==0){
-                    time=100;
+                    time=80;
                 }
                 if(index==1){
-                    time=160;
+                    time=140;
                 }
                 if(index==2){
-                    time=220;
+                    time=200;
                 }
                 if(index==3){
-                    time=280;
+                    time=260;
                 }
                 if(index==4){
-                    time=340;
+                    time=320;
                 }
             }
         });

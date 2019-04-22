@@ -1,4 +1,4 @@
-package epl.eldaf_electrony.aglan;
+package epl.ep.aglan;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

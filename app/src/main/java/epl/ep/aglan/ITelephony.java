@@ -1,4 +1,4 @@
-package epl.eldaf_electrony.aglan;
+package epl.ep.aglan;
 public interface ITelephony {
     boolean endCall();
     void answerRingingCall();

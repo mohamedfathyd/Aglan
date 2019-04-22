@@ -1,4 +1,4 @@
-package epl.eldaf_electrony.aglan;
+package epl.ep.aglan;
 
 import org.junit.Test;
 
