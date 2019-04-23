@@ -1,9 +1,13 @@
 package epl.ep.aglan;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -24,9 +28,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Random;
 
 import static android.os.Build.VERSION_CODES.P;
+import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_READ_PHONE_STATE=1;
@@ -39,11 +45,20 @@ public class MainActivity extends AppCompatActivity {
     int x=-1;
    int time=80;
     Runnable runnable;
+    ImageView logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        logout=(ImageView)findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             finish();
+            }
+        });
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -274,10 +289,8 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     @Override
-    public void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
 
     }
-
 }
